@@ -1,15 +1,10 @@
-from webwurst/ubuntu
+from ubuntu:14.04
+env DEBIAN_FRONTEND noninteractive
+
 run apt-get update
 
-# add repository
-run curl http://www.arangodb.org/repositories/arangodb2/xUbuntu_14.04/Release.key | apt-key add -
-add arangodb.list /etc/apt/sources.list.d/
-run apt-get update
+# locales
+env LC_ALL C.UTF-8
 
-# arangodb
-run apt-get -y install arangodb
-add arangodb-start /usr/local/bin/
-
-cmd /usr/local/bin/arangodb-start
-volume ["/var/lib/arango", "/var/lib/arangodb-apps"]
-expose 8529
+# helper
+run apt-get -y install git vim curl less gzip bzip2 unzip byobu jq
